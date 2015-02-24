@@ -11,6 +11,7 @@
             <img src="${asset:context:images/tapestry.png}"
                  alt="${message:greeting}" title="${message:greeting}" />
         </p>
+        <h1>Nenad Strainović 1899</h1>
         <h3>${message:greeting}</h3>
         <p>The current time is: <strong>${currentTime}</strong></p>
         <p>
