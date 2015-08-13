@@ -69,16 +69,16 @@ public class AppModule
 		configuration.add(SymbolConstants.MINIFICATION_ENABLED, true);
 	}
 
-	/*
+
 	// This will override the bundled bootstrap version and will compile it at runtime
 	@Contribute(JavaScriptStack.class)
 	@Core
 	public static void overrideBootstrapCSS(OrderedConfiguration<StackExtension> configuration)
 	{
 		configuration.override("bootstrap.css",
-				new StackExtension(StackExtensionType.STYLESHEET, "context:mybootstrap/css/bootstrap.css"), "before:tapestry.css");
+				new StackExtension(StackExtensionType.STYLESHEET, "context:css/bootstrap.min.css"), "before:tapestry.css");
 	}
-	*/
+
 
     /**
      * This is a service definition, the service will be named "TimingFilter". The interface,

@@ -47,12 +47,12 @@ public class Index
 	}
 
 
-	Object onActionFromLearnMore()
-	{
-		about.setLearn("LearnMore");
-
-		return  about;
-	}
+//	Object onActionFromLearnMore()
+//	{
+//		about.setLearn("LearnMore");
+//
+//		return  about;
+//	}
 
 	@Log
 	void onComplete()

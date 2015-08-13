@@ -1,12 +1,7 @@
 package com.mycompany.methotels.components;
 
 import org.apache.tapestry5.*;
-import org.apache.tapestry5.alerts.AlertManager;
 import org.apache.tapestry5.annotations.*;
-import org.apache.tapestry5.corelib.components.Form;
-import org.apache.tapestry5.corelib.components.PasswordField;
-import org.apache.tapestry5.corelib.components.TextField;
-import org.apache.tapestry5.corelib.components.Zone;
 import org.apache.tapestry5.ioc.annotations.*;
 import org.apache.tapestry5.BindingConstants;
 import org.apache.tapestry5.SymbolConstants;
@@ -14,7 +9,7 @@ import org.apache.tapestry5.SymbolConstants;
 /**
  * Layout component for pages of application test-project.
  */
-@Import(module="bootstrap/collapse")
+@Import(module="bootstrap/collapse", stylesheet = {"context:css/app.css", "context:css/responsive.css"}, library={"context:js/bootstrap.min.js"})
 public class Layout
 {
 	@Inject
@@ -46,7 +41,7 @@ public class Layout
 
 	public String[] getPageNames()
 	{
-		return new String[]{"Index", "About", "Contact"};
+		return new String[]{"Index", "DodajSobe", "About", "Contact"};
 	}
 
 }

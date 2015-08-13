@@ -1,0 +1,63 @@
+@media(max-width: 768px) {
+	body {
+		font-size: 15px;
+	}
+
+	.box {
+		margin-bottom: 35px;
+	}
+
+	.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus,
+	.navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover {
+		background-color: #fff;
+	}
+
+	.navbar-default .navbar-toggle:hover {
+		background-color: #ccc;
+	}
+
+	.navbar-default .navbar-toggle .icon-bar {
+		background-color: #000;
+	}
+
+	.navbar-default .navbar-toggle {
+		border-color: #000;
+	}
+
+	.box {
+		min-height: 0;
+	}
+
+	.box h2 {
+		font-size: 24px;
+	}
+
+	.main {
+		margin: 20px 0;
+	}
+
+	.intro {
+		margin-bottom: 20px;
+	}
+
+	.box h2 {
+		font-size: 18px;
+	}
+
+	.box .btn {
+		display: block;
+		text-transform: uppercase;
+		font-weight: bold;
+		font-size: 13px;
+	}
+}
+
+@media(max-width: 640px) {
+	body {
+		font-size: 13px;
+	}
+
+	.box {
+		padding: 15px;
+	}
+}
