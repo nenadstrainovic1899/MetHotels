@@ -5,31 +5,39 @@
  */
 package com.mycompany.methotels.pages;
 
-import com.mycompany.methotels.data.Soba;
+import com.mycompany.methotels.entities.Soba;
 import java.util.ArrayList;
-import org.apache.tapestry5.annotations.Persist;
 import org.apache.tapestry5.annotations.Property;
+import org.apache.tapestry5.hibernate.annotations.CommitAfter;
+import org.apache.tapestry5.ioc.annotations.Inject;
+import org.hibernate.Session;
 
 /**
  *
  * @author NenadS
  */
 public class DodajSobe {
-    @Property
-    @Persist
-    private ArrayList<Soba> listaSoba;
-    
+
     @Property
     private Soba soba;
-    
-    void onActivate(){
+
+    @Property
+    private ArrayList<Soba> listaSoba;
+
+    @Inject
+    private Session session;
+
+    void onActivate() {
         if (listaSoba == null) {
             listaSoba = new ArrayList<Soba>();
         }
+
+        listaSoba = (ArrayList<Soba>) session.createCriteria(Soba.class).list();
     }
-    
-    Object onSuccess(){
-        listaSoba.add(soba);
+
+    @CommitAfter
+    Object onSuccess() {
+        session.persist(soba);
         return this;
     }
 }

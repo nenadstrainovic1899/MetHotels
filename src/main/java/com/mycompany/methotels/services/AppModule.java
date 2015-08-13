@@ -44,6 +44,7 @@ public class AppModule
     	// by adding the same key in the contributeApplicationDefaults method.
         configuration.override(SymbolConstants.APPLICATION_VERSION, "1.0-SNAPSHOT");
 		configuration.override(SymbolConstants.PRODUCTION_MODE, false);
+                configuration.override(SymbolConstants.HMAC_PASSPHRASE, 0);
     }
 
     public static void contributeApplicationDefaults(
