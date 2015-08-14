@@ -12,6 +12,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -41,7 +43,7 @@ public class Soba implements Serializable {
     @Basic(optional = false)
     @Validate("required, min=0, max=10")
     @Column(name = "sprat")
-    private int sprat;
+    private short sprat;
     @Basic(optional = false)
     @Column(name = "tv")
     private boolean tv;
@@ -51,7 +53,10 @@ public class Soba implements Serializable {
     @Basic(optional = false)
     @Column(name = "djakuzi")
     private boolean djakuzi;
-    
+    @JoinColumn(name = "tip_sobe_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private TipSobe tipSobeId;
+
     @Inject
     public Soba() {
     }
@@ -60,7 +65,7 @@ public class Soba implements Serializable {
         this.id = id;
     }
 
-    public Soba(Integer id, String ime, int sprat, boolean tv, boolean internet, boolean djakuzi) {
+    public Soba(Integer id, String ime, short sprat, boolean tv, boolean internet, boolean djakuzi) {
         this.id = id;
         this.ime = ime;
         this.sprat = sprat;
@@ -86,11 +91,11 @@ public class Soba implements Serializable {
         this.ime = ime;
     }
 
-    public int getSprat() {
+    public short getSprat() {
         return sprat;
     }
 
-    public void setSprat(int sprat) {
+    public void setSprat(short sprat) {
         this.sprat = sprat;
     }
 
@@ -116,6 +121,14 @@ public class Soba implements Serializable {
 
     public void setDjakuzi(boolean djakuzi) {
         this.djakuzi = djakuzi;
+    }
+
+    public TipSobe getTipSobeId() {
+        return tipSobeId;
+    }
+
+    public void setTipSobeId(TipSobe tipSobeId) {
+        this.tipSobeId = tipSobeId;
     }
 
     @Override

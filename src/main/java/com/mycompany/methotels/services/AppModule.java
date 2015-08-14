@@ -1,5 +1,9 @@
 package com.mycompany.methotels.services;
 
+import com.mycompany.methotels.persistences.SobaDao;
+import com.mycompany.methotels.persistences.SobaDaoImpl;
+import com.mycompany.methotels.persistences.TipSobeDao;
+import com.mycompany.methotels.persistences.TipSobeDaoImpl;
 import java.io.IOException;
 
 import org.apache.tapestry5.*;
@@ -24,6 +28,8 @@ public class AppModule
 {
     public static void bind(ServiceBinder binder)
     {
+        binder.bind(SobaDao.class, SobaDaoImpl.class);
+        binder.bind(TipSobeDao.class, TipSobeDaoImpl.class);
         // binder.bind(MyServiceInterface.class, MyServiceImpl.class);
 
         // Make bind() calls on the binder object to define most IoC services.

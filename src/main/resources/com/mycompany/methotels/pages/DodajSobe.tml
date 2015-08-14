@@ -3,7 +3,30 @@
       xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd"
       xmlns:p="tapestry:parameter">
 
-    <t:beaneditform object="soba"/>
-    <t:grid t:source="listaSoba"/>
+    <t:beaneditform object="soba" add="tipSobeId">
+        <p:tipSobeId>
+            <t:label for="tipSobeId">Tip sobe:</t:label>
+            <t:select t:blankLabel="Odaberite tip sobe" t:id="tipSobeId"
+                      encoder="encoder" model="listaTipovaSoba" validate="required"/>
+        </p:tipSobeId>
+    </t:beaneditform>
+    <t:grid t:source="listaSoba" add="delete,tipSobe" row="jednaSoba"
+            reorder="ime,sprat,tv,internet,djakuzi,tipSobe,delete">
+        <p:deleteCell>
+            <t:actionlink t:id="delete" context="jednaSoba.id">Obriši</t:actionlink>
+        </p:deleteCell>
+        <p:tipSobeCell>
+            ${tipSobe}
+        </p:tipSobeCell>
+        <p:tvCell>
+            ${tv}
+        </p:tvCell>
+        <p:internetCell>
+            ${internet}
+        </p:internetCell>
+        <p:djakuziCell>
+            ${djakuzi}
+        </p:djakuziCell>
+    </t:grid>
 
 </html>

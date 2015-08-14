@@ -1,0 +1,13 @@
+<html t:type="layout" title="MetHotels Index"
+      t:sidebarTitle="Framework Version"
+      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd"
+      xmlns:p="tapestry:parameter">
+
+    <t:beaneditform object="tipSobe"/>
+    <t:grid t:source="listaTipovaSoba" add="delete" row="jedanTipSobe">
+        <p:deleteCell>
+            <t:actionlink t:id="delete" context="jedanTipSobe.id">Obriši</t:actionlink>
+        </p:deleteCell>
+    </t:grid>
+
+</html>
