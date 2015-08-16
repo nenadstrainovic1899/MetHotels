@@ -5,17 +5,18 @@
  */
 package com.mycompany.methotels.entities;
 
+import com.mycompany.methotels.data.Rola;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -29,10 +30,10 @@ import org.apache.tapestry5.ioc.annotations.Inject;
  * @author NenadS
  */
 @Entity
-@Table(name = "soba")
+@Table(name = "korisnik")
 @NamedQueries({
-    @NamedQuery(name = "Soba.findAll", query = "SELECT s FROM Soba s")})
-public class Soba implements Serializable {
+    @NamedQuery(name = "Korisnik.findAll", query = "SELECT k FROM Korisnik k")})
+public class Korisnik implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -41,43 +42,43 @@ public class Soba implements Serializable {
     @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
-    @Validate("required, minLength=5, maxLength=60")
+    @Validate("required")
     @Column(name = "ime")
     private String ime;
     @Basic(optional = false)
-    @Validate("required, min=0, max=10")
-    @Column(name = "sprat")
-    private short sprat;
+    @Validate("required")
+    @Column(name = "prezime")
+    private String prezime;
     @Basic(optional = false)
-    @Column(name = "tv")
-    private boolean tv;
+    @Validate("required")
+    @Column(name = "username")
+    private String username;
     @Basic(optional = false)
-    @Column(name = "internet")
-    private boolean internet;
+    @Validate("required")
+    @Column(name = "password")
+    private String password;
     @Basic(optional = false)
-    @Column(name = "djakuzi")
-    private boolean djakuzi;
-    @JoinColumn(name = "tip_sobe_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private TipSobe tipSobeId;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "sobaId")
+    @Enumerated(EnumType.STRING)
+    @Column(name = "rola")
+    private Rola rola;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "korisnikId")
     private List<Rezervacija> rezervacijaList;
 
     @Inject
-    public Soba() {
+    public Korisnik() {
     }
 
-    public Soba(Integer id) {
+    public Korisnik(Integer id) {
         this.id = id;
     }
 
-    public Soba(Integer id, String ime, short sprat, boolean tv, boolean internet, boolean djakuzi) {
+    public Korisnik(Integer id, String ime, String prezime, String username, String password, Rola rola) {
         this.id = id;
         this.ime = ime;
-        this.sprat = sprat;
-        this.tv = tv;
-        this.internet = internet;
-        this.djakuzi = djakuzi;
+        this.prezime = prezime;
+        this.username = username;
+        this.password = password;
+        this.rola = rola;
     }
 
     public Integer getId() {
@@ -97,44 +98,28 @@ public class Soba implements Serializable {
         this.ime = ime;
     }
 
-    public short getSprat() {
-        return sprat;
+    public String getPrezime() {
+        return prezime;
     }
 
-    public void setSprat(short sprat) {
-        this.sprat = sprat;
+    public void setPrezime(String prezime) {
+        this.prezime = prezime;
     }
 
-    public boolean getTv() {
-        return tv;
+    public String getUsername() {
+        return username;
     }
 
-    public void setTv(boolean tv) {
-        this.tv = tv;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public boolean getInternet() {
-        return internet;
+    public String getPassword() {
+        return password;
     }
 
-    public void setInternet(boolean internet) {
-        this.internet = internet;
-    }
-
-    public boolean getDjakuzi() {
-        return djakuzi;
-    }
-
-    public void setDjakuzi(boolean djakuzi) {
-        this.djakuzi = djakuzi;
-    }
-
-    public TipSobe getTipSobeId() {
-        return tipSobeId;
-    }
-
-    public void setTipSobeId(TipSobe tipSobeId) {
-        this.tipSobeId = tipSobeId;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override
@@ -147,10 +132,10 @@ public class Soba implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Soba)) {
+        if (!(object instanceof Korisnik)) {
             return false;
         }
-        Soba other = (Soba) object;
+        Korisnik other = (Korisnik) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -159,8 +144,16 @@ public class Soba implements Serializable {
 
     @Override
     public String toString() {
-        return this.getIme();
-//        return "com.mycompany.methotels.entities.Soba[ id=" + id + " ]";
+        return "com.mycompany.methotels.entities.Korisnik[ id=" + id + " ]";
+    }
+
+    @NonVisual
+    public Rola getRola() {
+        return rola;
+    }
+
+    public void setRola(Rola rola) {
+        this.rola = rola;
     }
 
     public List<Rezervacija> getRezervacijaList() {

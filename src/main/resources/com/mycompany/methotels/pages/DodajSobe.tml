@@ -5,9 +5,11 @@
 
     <t:beaneditform object="soba" add="tipSobeId">
         <p:tipSobeId>
-            <t:label for="tipSobeId">Tip sobe:</t:label>
-            <t:select t:blankLabel="Odaberite tip sobe" t:id="tipSobeId"
+            <div class="form-group">
+                <t:label for="tipSobeId">Tip sobe:</t:label>
+                <t:select t:blankLabel="Odaberite tip sobe" t:id="tipSobeId"
                       encoder="encoder" model="listaTipovaSoba" validate="required"/>
+            </div>
         </p:tipSobeId>
     </t:beaneditform>
     <t:grid t:source="listaSoba" add="delete,tipSobe" row="jednaSoba"

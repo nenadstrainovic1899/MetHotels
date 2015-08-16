@@ -1,0 +1,26 @@
+<html t:type="layout" title="MetHotels Index"
+      t:sidebarTitle="Framework Version"
+      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd"
+      xmlns:p="tapestry:parameter">
+
+    <t:beaneditform object="rezervacija" add="sobaId"
+                    reorder="sobaId,datum,brojDana">
+        <p:sobaId>
+            <div class="form-group">
+                <t:label for="sobaId">Odaberite sobu:</t:label>
+                <t:select t:blankLabel="Odaberite sobu" t:id="sobaId"
+                          encoder="encoder" model="listaSoba" validate="required"/>
+            </div>
+        </p:sobaId>
+    </t:beaneditform>
+<!--    <t:grid t:source="listaRezervacija" add="delete,soba" row="jednaRezervacija"
+        reorder="datum,brojDana,soba,delete">
+        <p:sobaCell>
+            ${soba}
+        </p:sobaCell>
+        <p:deleteCell>
+            <t:actionlink t:id="delete" context="jednaRezervacija.id">Obriši</t:actionlink>
+        </p:deleteCell>
+    </t:grid>-->
+
+</html>

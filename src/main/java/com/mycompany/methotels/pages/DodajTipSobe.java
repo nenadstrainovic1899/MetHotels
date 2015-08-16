@@ -7,8 +7,9 @@ package com.mycompany.methotels.pages;
 
 import com.mycompany.methotels.entities.TipSobe;
 import com.mycompany.methotels.persistences.TipSobeDao;
-import java.util.ArrayList;
+import com.mycompany.methotels.services.ProtectedPage;
 import java.util.List;
+import javax.annotation.security.RolesAllowed;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.hibernate.annotations.CommitAfter;
 import org.apache.tapestry5.ioc.annotations.Inject;
@@ -17,6 +18,8 @@ import org.apache.tapestry5.ioc.annotations.Inject;
  *
  * @author NenadS
  */
+@ProtectedPage
+@RolesAllowed(value={"Admin"})
 public class DodajTipSobe {
 
     @Property

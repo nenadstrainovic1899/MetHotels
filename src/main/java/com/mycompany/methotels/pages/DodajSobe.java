@@ -9,18 +9,20 @@ import com.mycompany.methotels.entities.Soba;
 import com.mycompany.methotels.entities.TipSobe;
 import com.mycompany.methotels.persistences.SobaDao;
 import com.mycompany.methotels.persistences.TipSobeDao;
-import java.util.ArrayList;
+import com.mycompany.methotels.services.ProtectedPage;
 import java.util.List;
+import javax.annotation.security.RolesAllowed;
 import org.apache.tapestry5.ValueEncoder;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.hibernate.annotations.CommitAfter;
 import org.apache.tapestry5.ioc.annotations.Inject;
-import org.hibernate.Session;
 
 /**
  *
  * @author NenadS
  */
+@ProtectedPage
+@RolesAllowed(value={"Admin"})
 public class DodajSobe {
 
     @Property

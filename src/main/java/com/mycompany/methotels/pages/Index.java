@@ -1,6 +1,5 @@
 package com.mycompany.methotels.pages;
 
-
 import org.apache.tapestry5.Block;
 import org.apache.tapestry5.EventContext;
 import org.apache.tapestry5.SymbolConstants;
@@ -18,34 +17,31 @@ import java.util.Date;
 /**
  * Start page of application MetHotels.
  */
-public class Index
-{
-	@Inject
-	private Logger logger;
+public class Index {
 
-	@Inject
-	private AjaxResponseRenderer ajaxResponseRenderer;
+    @Inject
+    private Logger logger;
 
-	@Property
-	@Inject
-	@Symbol(SymbolConstants.TAPESTRY_VERSION)
-	private String tapestryVersion;
+    @Inject
+    private AjaxResponseRenderer ajaxResponseRenderer;
 
-	@InjectPage
-	private About about;
+    @Property
+    @Inject
+    @Symbol(SymbolConstants.TAPESTRY_VERSION)
+    private String tapestryVersion;
 
-	@Inject
-	private Block block;
+    @InjectPage
+    private About about;
 
+    @Inject
+    private Block block;
 
-	// Handle call with an unwanted context
-	Object onActivate(EventContext eventContext)
-	{
-		return eventContext.getCount() > 0 ?
-				new HttpError(404, "Resource not found") :
-				null;
-	}
-
+    // Handle call with an unwanted context
+    Object onActivate(EventContext eventContext) {
+        return eventContext.getCount() > 0
+                ? new HttpError(404, "Resource not found")
+                : null;
+    }
 
 //	Object onActionFromLearnMore()
 //	{
@@ -53,24 +49,19 @@ public class Index
 //
 //		return  about;
 //	}
+    @Log
+    void onComplete() {
+        logger.info("Complete call on Index page");
+    }
 
-	@Log
-	void onComplete()
-	{
-		logger.info("Complete call on Index page");
-	}
+    @Log
+    void onAjax() {
+        logger.info("Ajax call on Index page");
 
-	@Log
-	void onAjax()
-	{
-		logger.info("Ajax call on Index page");
+        ajaxResponseRenderer.addRender("middlezone", block);
+    }
 
-		ajaxResponseRenderer.addRender("middlezone", block);
-	}
-
-
-	public Date getCurrentTime()
-	{
-		return new Date();
-	}
+    public Date getCurrentTime() {
+        return new Date();
+    }
 }

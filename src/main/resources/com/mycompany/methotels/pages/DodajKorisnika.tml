@@ -1,0 +1,16 @@
+<html t:type="layout" title="MetHotels Index"
+      t:sidebarTitle="Framework Version"
+      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd"
+      xmlns:p="tapestry:parameter">
+
+    <t:beaneditform t:id="form" object="noviKorisnik">
+        <t:errors/>
+        <p:password>
+            <div class="form-group">
+                <t:label for="password"/>
+                <t:passwordfield t:id="password" value="noviKorisnik.password"/>
+            </div>
+        </p:password>
+    </t:beaneditform>
+
+</html>

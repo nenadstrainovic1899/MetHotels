@@ -50,9 +50,16 @@
                                     <a href="#">Podešavanja</a>
                                 </li>
                                 <li class="divider"></li>
-                                <li>
-                                    <a href="#">Odjava</a>
-                                </li>
+                                <t:if test="!loggedIn">
+                                    <li>
+                                        <t:pagelink page="login">Prijava</t:pagelink>
+                                    </li>
+                                </t:if>
+                                <t:if test="loggedIn">
+                                    <li>
+                                        <t:actionlink t:id="logout">Odjava</t:actionlink>
+                                    </li>
+                                </t:if>
                             </ul>
                         </li>
                     </ul>

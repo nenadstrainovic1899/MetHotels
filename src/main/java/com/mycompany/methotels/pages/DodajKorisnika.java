@@ -5,38 +5,32 @@
  */
 package com.mycompany.methotels.pages;
 
+import com.mycompany.methotels.data.Rola;
 import com.mycompany.methotels.entities.Korisnik;
 import com.mycompany.methotels.persistences.KorisnikDao;
 import org.apache.tapestry5.annotations.Component;
 import org.apache.tapestry5.annotations.Property;
-import org.apache.tapestry5.annotations.SessionState;
 import org.apache.tapestry5.corelib.components.BeanEditForm;
+import org.apache.tapestry5.hibernate.annotations.CommitAfter;
 import org.apache.tapestry5.ioc.annotations.Inject;
 
 /**
  *
  * @author NenadS
  */
-public class Login {
-
-    @Property
-    private Korisnik loginKorisnik;
+public class DodajKorisnika {
 
     @Inject
     private KorisnikDao korisnikDao;
 
-    @SessionState
+    @Property
+    private Korisnik noviKorisnik;
+
+    @Property
     private Korisnik ulogovanKorisnik;
 
     @Component
     private BeanEditForm form;
-
-    Object onActivate() {
-        if (ulogovanKorisnik.getUsername() != null) {
-            return Index.class;
-        }
-        return null;
-    }
 
     public String getMD5Hash(String yourString) {
         try {
@@ -52,16 +46,18 @@ public class Login {
         }
     }
 
+    @CommitAfter
     Object onSuccess() {
-        String password = getMD5Hash(loginKorisnik.getPassword());
-        Korisnik u = korisnikDao.proveriKorisnika(loginKorisnik.getUsername(), password);
-        if (u != null) {
+        if (!korisnikDao.korisnikPostoji(noviKorisnik.getUsername())) {
+            String unhashPassword = noviKorisnik.getPassword();
+            noviKorisnik.setPassword(getMD5Hash(unhashPassword));
+            noviKorisnik.setRola(Rola.Korisnik);
+            Korisnik u = korisnikDao.registrujKorisnika(noviKorisnik);
             ulogovanKorisnik = u;
             return Index.class;
         } else {
-            form.recordError("Uneli ste pogresne parametre");
+            form.recordError("Username koji ste uneli vec postoji");
             return null;
         }
     }
-
 }
