@@ -9,7 +9,10 @@ import com.mycompany.methotels.entities.TipSobe;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.tapestry5.ioc.annotations.Inject;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
 /**
@@ -17,7 +20,7 @@ import org.hibernate.criterion.Restrictions;
  * @author NenadS
  */
 public class TipSobeDaoImpl implements TipSobeDao {
-    
+
     @Inject
     private Session session;
 
@@ -27,7 +30,7 @@ public class TipSobeDaoImpl implements TipSobeDao {
         if (listaSvihTipovaSoba == null) {
             return new ArrayList<TipSobe>();
         }
-        
+
         return listaSvihTipovaSoba;
     }
 
@@ -51,5 +54,25 @@ public class TipSobeDaoImpl implements TipSobeDao {
     public void dodajIliUpdatujTipSobe(TipSobe tipSobe) {
         session.merge(tipSobe);
     }
-    
+
+    @Override
+    public List<TipSobe> getListaTipovaSobaPoImenu(String tipSobe) {
+        return session.createCriteria(TipSobe.class).add(Restrictions.ilike("tipSobe", tipSobe + "%")).list();
+    }
+
+    @Override
+    public List<TipSobe> loadActiveFromTo(int from) {
+        int page = (from - 1) * 20;
+        List<TipSobe> lista
+                = session.createCriteria(TipSobe.class).setFirstResult(page).setMaxResults(20).addOrder(Order.asc("id"))
+                        .setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+        return lista;
+    }
+
+    @Override
+    public int allActiveSizeTipoviSoba() {
+        Long l = (Long) session.createCriteria(TipSobe.class).setProjection(Projections.rowCount()).uniqueResult();
+        return l.intValue();
+    }
+
 }

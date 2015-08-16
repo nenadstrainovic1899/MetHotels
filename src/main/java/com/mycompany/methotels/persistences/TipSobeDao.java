@@ -23,4 +23,10 @@ public interface TipSobeDao {
     public void obrisiTipSobe(Integer id);
 
     public void dodajIliUpdatujTipSobe(TipSobe tipSobe);
+
+    public List<TipSobe> getListaTipovaSobaPoImenu(String tipSobe);
+
+    public abstract int allActiveSizeTipoviSoba();
+
+    public abstract List<TipSobe> loadActiveFromTo(int from);
 }

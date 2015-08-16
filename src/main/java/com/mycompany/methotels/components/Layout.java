@@ -51,7 +51,7 @@ public class Layout {
     }
 
     public String[] getPageNames() {
-        return new String[]{"Index", "DodajTipSobe", "DodajSobe", "DodajKorisnika", "RezervacijaSobe"};
+        return new String[]{"Index", "DodajTipSobe", "DodajSobe", "DodajKorisnika", "RezervacijaSobe", "PretragaTipovaSoba"};
     }
 
 }
