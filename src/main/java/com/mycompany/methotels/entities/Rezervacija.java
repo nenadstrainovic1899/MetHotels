@@ -31,13 +31,10 @@ import org.apache.tapestry5.ioc.annotations.Inject;
 @Table(name = "rezervacija")
 @NamedQueries({
     @NamedQuery(name = "Rezervacija.findAll", query = "SELECT r FROM Rezervacija r")})
-public class Rezervacija implements Serializable {
+public class Rezervacija extends AbstractEntity implements Serializable {
+    
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id")
-    private Integer id;
+
     @Basic(optional = false)
     @Column(name = "datum")
     @Temporal(TemporalType.DATE)

@@ -46,5 +46,10 @@ public class TipSobeDaoImpl implements TipSobeDao {
         TipSobe tipSobe = (TipSobe) session.createCriteria(TipSobe.class).add(Restrictions.eq("id", id)).uniqueResult();
         session.delete(tipSobe);
     }
+
+    @Override
+    public void dodajIliUpdatujTipSobe(TipSobe tipSobe) {
+        session.merge(tipSobe);
+    }
     
 }

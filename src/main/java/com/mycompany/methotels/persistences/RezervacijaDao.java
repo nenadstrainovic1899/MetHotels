@@ -5,6 +5,7 @@
  */
 package com.mycompany.methotels.persistences;
 
+import com.mycompany.methotels.entities.Korisnik;
 import com.mycompany.methotels.entities.Rezervacija;
 import java.util.List;
 
@@ -14,7 +15,7 @@ import java.util.List;
  */
 public interface RezervacijaDao {
 
-    public List<Rezervacija> getListaRezervacija();
+    public List<Rezervacija> getListaRezervacija(Korisnik korisnik);
 
     public Rezervacija getRezervacijaById(Integer id);
 

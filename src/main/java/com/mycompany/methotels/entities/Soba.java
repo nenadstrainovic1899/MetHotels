@@ -32,14 +32,10 @@ import org.apache.tapestry5.ioc.annotations.Inject;
 @Table(name = "soba")
 @NamedQueries({
     @NamedQuery(name = "Soba.findAll", query = "SELECT s FROM Soba s")})
-public class Soba implements Serializable {
+public class Soba extends AbstractEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id")
-    private Integer id;
+
     @Basic(optional = false)
     @Validate("required, minLength=5, maxLength=60")
     @Column(name = "ime")

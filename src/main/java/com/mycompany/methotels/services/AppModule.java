@@ -1,5 +1,7 @@
 package com.mycompany.methotels.services;
 
+import com.mycompany.methotels.persistences.GenericDao;
+import com.mycompany.methotels.persistences.GenericDaoImpl;
 import com.mycompany.methotels.persistences.KorisnikDao;
 import com.mycompany.methotels.persistences.KorisnikDaoImpl;
 import com.mycompany.methotels.persistences.RezervacijaDao;
@@ -36,6 +38,7 @@ public class AppModule {
         binder.bind(TipSobeDao.class, TipSobeDaoImpl.class);
         binder.bind(KorisnikDao.class, KorisnikDaoImpl.class);
         binder.bind(RezervacijaDao.class, RezervacijaDaoImpl.class);
+        binder.bind(GenericDao.class,GenericDaoImpl.class);
         // binder.bind(MyServiceInterface.class, MyServiceImpl.class);
 
         // Make bind() calls on the binder object to define most IoC services.

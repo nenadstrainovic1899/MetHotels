@@ -30,13 +30,10 @@ import org.apache.tapestry5.ioc.annotations.Inject;
 @Table(name = "tip_sobe")
 @NamedQueries({
     @NamedQuery(name = "TipSobe.findAll", query = "SELECT t FROM TipSobe t")})
-public class TipSobe implements Serializable {
+public class TipSobe extends AbstractEntity implements Serializable {
+    
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id")
-    private Integer id;
+
     @Basic(optional = false)
     @Validate("required, minLength=5, maxLength=60")
     @Column(name = "tip_sobe")

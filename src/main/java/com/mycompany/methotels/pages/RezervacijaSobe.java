@@ -50,6 +50,10 @@ public class RezervacijaSobe {
     
     @Inject
     private SobaDao sobaDao;
+    
+    public String getIme() {
+        return rezervacijaDao.getRezervacijaById(jednaRezervacija.getId()).getKorisnikId().getIme();
+    }
 
     public String getSoba() {
         if (jednaRezervacija.getSobaId() != null) {
@@ -62,7 +66,7 @@ public class RezervacijaSobe {
     void onActivate() {
         rezervacija = new Rezervacija();
 
-        listaRezervacija = rezervacijaDao.getListaRezervacija();
+        listaRezervacija = rezervacijaDao.getListaRezervacija(ulogovanKorisnik);
         listaSoba = sobaDao.getListaSvihSoba();
     }
 
@@ -90,10 +94,10 @@ public class RezervacijaSobe {
         return this;
     }
 
-//    @CommitAfter
-//    Object onActionFromDelete(int id) {
-//        rezervacijaDao.obrisiRezervaciju(id);
-//        return this;
-//    }
+    @CommitAfter
+    Object onActionFromDelete(int id) {
+        rezervacijaDao.obrisiRezervaciju(id);
+        return this;
+    }
 
 }

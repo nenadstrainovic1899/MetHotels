@@ -13,14 +13,17 @@
             </div>
         </p:sobaId>
     </t:beaneditform>
-<!--    <t:grid t:source="listaRezervacija" add="delete,soba" row="jednaRezervacija"
-        reorder="datum,brojDana,soba,delete">
+    <t:grid t:source="listaRezervacija" add="delete,soba,ime" row="jednaRezervacija"
+        reorder="ime,datum,brojDana,soba,delete">
+        <p:imeCell>
+            ${ime}
+        </p:imeCell>
         <p:sobaCell>
             ${soba}
         </p:sobaCell>
         <p:deleteCell>
-            <t:actionlink t:id="delete" context="jednaRezervacija.id">Obriši</t:actionlink>
+            <t:actionlink t:id="delete" context="jednaRezervacija.id" class="btn btn-danger">Obriši</t:actionlink>
         </p:deleteCell>
-    </t:grid>-->
+    </t:grid>
 
 </html>

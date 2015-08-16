@@ -5,6 +5,8 @@
  */
 package com.mycompany.methotels.persistences;
 
+import com.mycompany.methotels.data.Rola;
+import com.mycompany.methotels.entities.Korisnik;
 import com.mycompany.methotels.entities.Rezervacija;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,8 +24,15 @@ public class RezervacijaDaoImpl implements RezervacijaDao {
     private Session session;
 
     @Override
-    public List<Rezervacija> getListaRezervacija() {
-        List<Rezervacija> listaSvihRezervacija = session.createCriteria(Rezervacija.class).list();
+    public List<Rezervacija> getListaRezervacija(Korisnik korisnik) {
+        List<Rezervacija> listaSvihRezervacija;
+        
+        if (korisnik.getRola().equals(Rola.Admin)) {
+            listaSvihRezervacija = session.createCriteria(Rezervacija.class).list();
+        } else {
+            listaSvihRezervacija = session.createCriteria(Rezervacija.class).add(Restrictions.eq("korisnikId", korisnik)).list();
+        }
+        
         if (listaSvihRezervacija == null) {
             return new ArrayList<Rezervacija>();
         }

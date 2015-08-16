@@ -21,4 +21,6 @@ public interface TipSobeDao {
     public void dodajTipSobe(TipSobe tipSobe);
 
     public void obrisiTipSobe(Integer id);
+
+    public void dodajIliUpdatujTipSobe(TipSobe tipSobe);
 }
