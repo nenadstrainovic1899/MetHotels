@@ -13,6 +13,8 @@ import com.mycompany.methotels.persistences.TipSobeDaoImpl;
 import com.mycompany.methotels.rest.TipSobeServiceInterface;
 import com.mycompany.methotels.rest.TipSobeWebService;
 import java.io.IOException;
+import org.apache.shiro.realm.AuthorizingRealm;
+import org.apache.shiro.realm.Realm;
 
 import org.apache.tapestry5.*;
 import org.apache.tapestry5.hibernate.HibernateTransactionAdvisor;
@@ -22,6 +24,7 @@ import org.apache.tapestry5.ioc.MethodAdviceReceiver;
 import org.apache.tapestry5.ioc.OrderedConfiguration;
 import org.apache.tapestry5.ioc.ServiceBinder;
 import org.apache.tapestry5.ioc.annotations.Contribute;
+import org.apache.tapestry5.ioc.annotations.InjectService;
 import org.apache.tapestry5.ioc.annotations.Local;
 import org.apache.tapestry5.ioc.annotations.Match;
 import org.apache.tapestry5.ioc.services.ApplicationDefaults;
@@ -47,6 +50,8 @@ public class AppModule {
         binder.bind(GenericDao.class, GenericDaoImpl.class);
         binder.bind(TipSobeServiceInterface.class, TipSobeWebService.class);
         binder.bind(FacebookService.class);
+        binder.bind(AuthorizingRealm.class,
+                KorisnikRealm.class).withId(KorisnikRealm.class.getSimpleName());
         // binder.bind(MyServiceInterface.class, MyServiceImpl.class);
 
         // Make bind() calls on the binder object to define most IoC services.
@@ -170,5 +175,10 @@ public class AppModule {
     public static void configureRestResources(Configuration<Object> singletons,
             TipSobeServiceInterface tipSobeWeb) {
         singletons.add(tipSobeWeb);
+    }
+
+    public static void contributeWebSecurityManager(Configuration<Realm> configuration,
+            @InjectService("KorisnikRealm") AuthorizingRealm userRealm) {
+        configuration.add(userRealm);
     }
 }

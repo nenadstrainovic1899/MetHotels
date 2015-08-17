@@ -11,6 +11,7 @@ import com.mycompany.methotels.persistences.TipSobeDao;
 import com.mycompany.methotels.services.ProtectedPage;
 import java.util.List;
 import javax.annotation.security.RolesAllowed;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.apache.tapestry5.annotations.Persist;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.hibernate.annotations.CommitAfter;
@@ -22,7 +23,8 @@ import org.apache.tapestry5.json.JSONObject;
  * @author NenadS
  */
 @ProtectedPage
-@RolesAllowed(value = {"Admin"})
+//@RolesAllowed(value = {"Admin"})
+@RequiresRoles("Admin")
 public class DodajTipSobe extends GenericEditor<TipSobe>{
 //
 //    @Property

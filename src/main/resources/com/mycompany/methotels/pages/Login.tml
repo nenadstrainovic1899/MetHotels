@@ -22,7 +22,7 @@
             </t:beaneditform>
             
             <a href="${facebookAuthentificationLink}">
-                <input type="button" class="input2" value="Login with facebook"/>
+                <input type="button" class="btn" value="Login with facebook"/>
             </a>
         </div>
     </div>

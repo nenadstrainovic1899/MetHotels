@@ -15,6 +15,8 @@ import com.restfb.FacebookClient;
 import java.io.IOException;
 import net.smartam.leeloo.common.exception.OAuthProblemException;
 import net.smartam.leeloo.common.exception.OAuthSystemException;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.apache.tapestry5.annotations.ActivationRequestParameter;
 import org.apache.tapestry5.annotations.Component;
 import org.apache.tapestry5.annotations.Property;
@@ -23,6 +25,7 @@ import org.apache.tapestry5.annotations.SetupRender;
 import org.apache.tapestry5.corelib.components.BeanEditForm;
 import org.apache.tapestry5.hibernate.annotations.CommitAfter;
 import org.apache.tapestry5.ioc.annotations.Inject;
+import org.tynamo.security.services.SecurityService;
 
 /**
  *
@@ -39,6 +42,8 @@ public class Login {
     @SessionState
     private Korisnik ulogovanKorisnik;
 
+    @Inject
+    private SecurityService securityService;
     @Inject
     private FacebookService facebookService;
     @SessionState
@@ -83,9 +88,19 @@ public class Login {
         Korisnik u = korisnikDao.proveriKorisnika(loginKorisnik.getUsername(), password);
         if (u != null) {
             ulogovanKorisnik = u;
+            Subject currentUser = securityService.getSubject();
+            UsernamePasswordToken token = new UsernamePasswordToken(u.getUsername(),
+                    loginKorisnik.getPassword());
+
+            try {
+                currentUser.login(token);
+            } catch (Exception e) {
+                form.recordError("Uneli ste pogrešne parametre");
+            }
             return Index.class;
         } else {
             form.recordError("Uneli ste pogresne parametre");
+            System.out.println("losi parametri");
             return null;
         }
     }
@@ -99,7 +114,7 @@ public class Login {
         if (facebookServiceInformation.getAccessToken() != null) {
             Korisnik fbuser = new Korisnik(userfb.getId(), " ", "fbIme", "fbPrezime", Rola.Korisnik,
                     userfb.getId());
-            
+
             Korisnik exist = null;
             System.out.println("proverava");
             if (korisnikDao.korisnikPostoji(userfb.getId())) {
