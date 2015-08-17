@@ -191,7 +191,7 @@
     </repositories>
 
     <properties>
-        <tapestry-release-version>5.4-beta-6</tapestry-release-version>
+        <tapestry-release-version>5.4-beta-26</tapestry-release-version>
         <servlet-api-release-version>2.5</servlet-api-release-version>
         <testng-release-version>6.5.2</testng-release-version>
         <easymock-release-version>3.0</easymock-release-version>
