@@ -36,7 +36,7 @@ import org.apache.tapestry5.ioc.annotations.Inject;
 public class Korisnik extends AbstractEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
+
     @Basic(optional = false)
     @Validate("required")
     @Column(name = "ime")
@@ -60,6 +60,18 @@ public class Korisnik extends AbstractEntity implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "korisnikId")
     private List<Rezervacija> rezervacijaList;
 
+    @Column(name = "FACEBOOK_ID")
+    private String facebookId;
+
+    public String getFacebookId() {
+        return facebookId;
+    }
+
+    @NonVisual
+    public void setFacebookId(String facebookId) {
+        this.facebookId = facebookId;
+    }
+
     @Inject
     public Korisnik() {
     }
@@ -68,13 +80,23 @@ public class Korisnik extends AbstractEntity implements Serializable {
         this.id = id;
     }
 
-    public Korisnik(Integer id, String ime, String prezime, String username, String password, Rola rola) {
+    public Korisnik(String username, String password, String ime, String prezime, Rola rola, String facebookId) {
+        this.username = username;
+        this.password = password;
+        this.ime = ime;
+        this.prezime = prezime;
+        this.rola = rola;
+        this.facebookId = facebookId;
+    }
+
+    public Korisnik(Integer id, String ime, String prezime, String username, String password, Rola rola, String facebookId) {
         this.id = id;
         this.ime = ime;
         this.prezime = prezime;
         this.username = username;
         this.password = password;
         this.rola = rola;
+        this.facebookId = facebookId;
     }
 
     public Integer getId() {

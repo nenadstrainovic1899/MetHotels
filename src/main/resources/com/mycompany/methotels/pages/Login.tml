@@ -3,7 +3,14 @@
       xmlns:p="tapestry:parameter">
 
     <div class="row">
-        <div class="span4 offset3">        
+        <div class="span4 offset3">
+            <t:if test="loggedInFb">
+                <script>
+                    window.onload = function(){
+                    location.reload();
+                    } </script>
+            </t:if>
+            
             <t:beaneditform t:id="form" object="loginKorisnik" submitlabel="Login" exclude="ime,prezime">
                 <t:errors/>
                 <p:password>
@@ -13,6 +20,10 @@
                     </div>
                 </p:password>
             </t:beaneditform>
+            
+            <a href="${facebookAuthentificationLink}">
+                <input type="button" class="input2" value="Login with facebook"/>
+            </a>
         </div>
     </div>
 
