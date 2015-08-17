@@ -8,6 +8,7 @@ package com.mycompany.methotels.components;
 import com.mycompany.methotels.entities.AbstractEntity;
 import com.mycompany.methotels.persistences.GenericDao;
 import java.util.List;
+import javax.xml.bind.annotation.XmlTransient;
 import org.apache.tapestry5.ComponentResources;
 import org.apache.tapestry5.PropertyConduit;
 import org.apache.tapestry5.annotations.InjectComponent;

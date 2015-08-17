@@ -10,14 +10,20 @@ import com.mycompany.methotels.persistences.SobaDao;
 import com.mycompany.methotels.persistences.SobaDaoImpl;
 import com.mycompany.methotels.persistences.TipSobeDao;
 import com.mycompany.methotels.persistences.TipSobeDaoImpl;
+import com.mycompany.methotels.rest.TipSobeServiceInterface;
+import com.mycompany.methotels.rest.TipSobeWebService;
 import java.io.IOException;
 
 import org.apache.tapestry5.*;
+import org.apache.tapestry5.hibernate.HibernateTransactionAdvisor;
+import org.apache.tapestry5.ioc.Configuration;
 import org.apache.tapestry5.ioc.MappedConfiguration;
+import org.apache.tapestry5.ioc.MethodAdviceReceiver;
 import org.apache.tapestry5.ioc.OrderedConfiguration;
 import org.apache.tapestry5.ioc.ServiceBinder;
 import org.apache.tapestry5.ioc.annotations.Contribute;
 import org.apache.tapestry5.ioc.annotations.Local;
+import org.apache.tapestry5.ioc.annotations.Match;
 import org.apache.tapestry5.ioc.services.ApplicationDefaults;
 import org.apache.tapestry5.ioc.services.SymbolProvider;
 import org.apache.tapestry5.services.*;
@@ -38,7 +44,8 @@ public class AppModule {
         binder.bind(TipSobeDao.class, TipSobeDaoImpl.class);
         binder.bind(KorisnikDao.class, KorisnikDaoImpl.class);
         binder.bind(RezervacijaDao.class, RezervacijaDaoImpl.class);
-        binder.bind(GenericDao.class,GenericDaoImpl.class);
+        binder.bind(GenericDao.class, GenericDaoImpl.class);
+        binder.bind(TipSobeServiceInterface.class, TipSobeWebService.class);
         // binder.bind(MyServiceInterface.class, MyServiceImpl.class);
 
         // Make bind() calls on the binder object to define most IoC services.
@@ -150,5 +157,17 @@ public class AppModule {
 
     public void contributeComponentRequestHandler(OrderedConfiguration<ComponentRequestFilter> configuration) {
         configuration.addInstance("PageProtectionFilter", PageProtectionFilter.class);
+    }
+
+    @Match("*TipSobe*")
+    public static void adviseTransactionally(
+            HibernateTransactionAdvisor advisor, MethodAdviceReceiver receiver) {
+        advisor.addTransactionCommitAdvice(receiver);
+    }
+
+    @Contribute(javax.ws.rs.core.Application.class)
+    public static void configureRestResources(Configuration<Object> singletons,
+            TipSobeServiceInterface tipSobeWeb) {
+        singletons.add(tipSobeWeb);
     }
 }

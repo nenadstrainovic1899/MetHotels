@@ -18,6 +18,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import org.apache.tapestry5.beaneditor.NonVisual;
 import org.apache.tapestry5.beaneditor.Validate;
 import org.apache.tapestry5.ioc.annotations.Inject;
@@ -27,6 +29,7 @@ import org.apache.tapestry5.ioc.annotations.Inject;
  * @author NenadS
  */
 @Entity
+@XmlRootElement
 @Table(name = "tip_sobe")
 @NamedQueries({
     @NamedQuery(name = "TipSobe.findAll", query = "SELECT t FROM TipSobe t")})
@@ -71,6 +74,7 @@ public class TipSobe extends AbstractEntity implements Serializable {
         this.tipSobe = tipSobe;
     }
 
+    @XmlTransient
     public List<Soba> getSobaList() {
         return sobaList;
     }
